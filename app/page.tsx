@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Shield, Users, Truck, Clock } from 'lucide-react';
+import TabsContainer from '../components/TabsContainer';
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('moving');
@@ -130,6 +131,7 @@ const Hero = () => {
                   <div className="flex items-center justify-center mb-4">
                     <h2 className="text-xl font-bold text-gray-900">Kainos skaičiuoklė</h2>
                   </div>
+                  <TabsContainer onTabChange={setActiveTab} />
                 </div>
                 <div className="absolute -top-1 -bottom-1 -left-1 -right-1 bg-gradient-to-b from-red-50/100 to-transparent rounded-2xl -z-10"></div>
               </div>
