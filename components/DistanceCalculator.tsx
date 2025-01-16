@@ -26,29 +26,12 @@ const DistanceCalculator = () => {
   const fromInputRef = useRef(null);
   const toInputRef = useRef(null);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.google) {
-      const autocompleteFrom = new window.google.maps.places.Autocomplete(fromInputRef.current);
-      const autocompleteTo = new window.google.maps.places.Autocomplete(toInputRef.current);
-
-      autocompleteFrom.addListener('place_changed', () => {
-        const place = autocompleteFrom.getPlace();
-        setFromAddress(place.formatted_address || '');
-        checkDistance();
-      });
-
-      autocompleteTo.addListener('place_changed', () => {
-        const place = autocompleteTo.getPlace();
-        setToAddress(place.formatted_address || '');
-        checkDistance();
-      });
-    }
-  }, []);
+  
 
   const checkDistance = async () => {
     if (fromAddress && toAddress) {
       try {
-        const response = await axios.post('/api/distance', {
+        const response = await axios.post('pages/api/distance', {
           fromAddress,
           toAddress,
         });
