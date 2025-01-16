@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { MapPin, ArrowRight, Truck, ArrowLeft } from 'lucide-react';
 
 const disposalVehicles = [
