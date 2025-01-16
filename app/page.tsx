@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function Home() {
   return (
     <div className="relative h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-black overflow-hidden">
