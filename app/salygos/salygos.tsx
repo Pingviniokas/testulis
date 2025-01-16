@@ -8,8 +8,8 @@ const PrivacyPolicy = () => {
       
       <p>
         <strong>
-          Brangūs mūsų Klientai, MB „Liumikas" svarbu teikti aukščiausios kokybės paslaugas Jums. 
-          Todėl mums reikia tvarkyti Jūsų asmens duomenis, remiantis MB „Liumikas" ASMENS DUOMENŲ 
+          Brangūs mūsų Klientai, MB „Liumikas&quot; svarbu teikti aukščiausios kokybės paslaugas Jums. 
+          Todėl mums reikia tvarkyti Jūsų asmens duomenis, remiantis MB „Liumikas&quot; ASMENS DUOMENŲ 
           TVARKYMO POLITIKA, kuri yra aprašyta žemiau. Mes užtikriname Jūsų asmens duomenų apsaugą ir privatumą.
         </strong>
       </p>
@@ -18,7 +18,7 @@ const PrivacyPolicy = () => {
       <ul>
         <li><strong>BDAR (Bendrasis duomenų apsaugos reglamentas)</strong> – Europos Parlamento ir Tarybos reglamentas (ES) 2016/679</li>
         <li><strong>Asmens duomenys</strong> – bet kokia informacija apie fizinį asmenį, kurio tapatybė nustatyta arba kurio tapatybę galima nustatyti</li>
-        <li><strong>Duomenų valdytojas</strong> – MB „Liumikas"</li>
+        <li><strong>Duomenų valdytojas</strong> – MB „Liumikas&quot;</li>
         <li><strong>Duomenų tvarkytojas</strong> – fizinis arba juridinis asmuo, kuris tvarko asmens duomenis valdytojo vardu</li>
         <li><strong>Politika</strong> – ši Asmens duomenų tvarkymo politika</li>
       </ul>

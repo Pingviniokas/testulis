@@ -8,8 +8,8 @@ const PrivacyPolicy = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900">Privatumo politika</h1>
           <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-            Brangūs mūsų Klientai, MB "Liumikas" svarbu teikti aukščiausios kokybės paslaugas Jums. Todėl mums reikia
-            tvarkyti Jūsų asmens duomenis, remiantis MB "Liumikas" ASMENS DUOMENŲ TVARKYMO POLITIKA. Mes užtikriname Jūsų
+            Brangūs mūsų Klientai, MB „Liumikas&quot; svarbu teikti aukščiausios kokybės paslaugas Jums. Todėl mums reikia
+            tvarkyti Jūsų asmens duomenis, remiantis MB „Liumikas&quot; ASMENS DUOMENŲ TVARKYMO POLITIKA. Mes užtikriname Jūsų
             asmens duomenų apsaugą ir privatumą.
           </p>
         </div>
