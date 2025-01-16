@@ -120,10 +120,10 @@ export default function Navbar() {
             <nav
                 ref={navRef}
                 className={`fixed w-full z-[100] transition-all duration-700 ${isLoaded ? 'navbar-enter' : 'opacity-0'
-                    } ${scrolled || isNavHovered || isMobileMenuOpen ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                    }`}
                 onMouseLeave={handleMouseLeave}
             >
-                <div className="max-w-7xl mx-auto px-4">
+                <div className="max-w-12xl mx-auto px-4">
                     <div className="flex items-center justify-between h-20">
                         {/* Logo with Home Link */}
                         <Link href="/" className="flex-shrink-0 relative w-[200px] h-[50px]">
@@ -137,29 +137,55 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <div
-                            className="hidden lg:flex items-center space-x-12"
-                            onMouseEnter={() => setIsNavHovered(true)}
-                        >
-                            <div
-                                className="relative"
-                                onMouseEnter={handleMouseEnter}
-                            >
-                                <Link href="/paslaugos" className={`font-semibold text-base transition-colors duration-300 ${scrolled || isNavHovered ? 'text-gray-800 hover:text-red-600' : 'text-white hover:text-red-400'}`}>
-                                    Paslaugos
+                        <div className="hidden lg:flex items-center justify-center mt-12"> {/* Added mt-8 for lower positioning */}
+                            <div className="bg-[#3b4956] w-[548px] h-[56px] rounded-[60px] flex items-center justify-between px-4">
+                                <Link
+                                    href="/paslaugos"
+                                    className="relative group"
+                                >
+                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
+                                        Paslaugos
+                                    </span>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                </Link>
+
+                                <Link
+                                    href="/apie-mus"
+                                    className="relative group"
+                                >
+                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
+                                        Apie mus
+                                    </span>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                </Link>
+
+                                <Link
+                                    href="/kontaktai"
+                                    className="relative group"
+                                >
+                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
+                                        Kontaktai
+                                    </span>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                </Link>
+
+                                <Link
+                                    href="/kainininkas"
+                                    className="relative group"
+                                >
+                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-[#FF0000] relative z-10 px-4">
+                                        Kainininkas
+                                    </span>
+                                    <div className="border-[1px] border-[#FF0000] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[128px] h-[50px] rounded-[60px]" />
                                 </Link>
                             </div>
-
-                            <Link href="/apie-mus" className={`font-semibold text-base transition-colors duration-300 ${scrolled || isNavHovered ? 'text-gray-800 hover:text-red-600' : 'text-white hover:text-red-400'}`}>
-                                Apie Mus
-                            </Link>
-                            <Link href="/kontaktai" className={`font-semibold text-base transition-colors duration-300 ${scrolled || isNavHovered ? 'text-gray-800 hover:text-red-600' : 'text-white hover:text-red-400'}`}>
-                                Kontaktai
-                            </Link>
-                            <button className="bg-red-600 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-red-700 transition-colors duration-300">
-                                Kainininkas
-                            </button>
                         </div>
+
+
+
+
+
+
 
                         {/* Mobile menu button */}
                         <div className="lg:hidden">
