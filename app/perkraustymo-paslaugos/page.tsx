@@ -35,7 +35,7 @@ const Hero = () => {
               <div className="bg-[#3B4956]/95 rounded-3xl absolute bottom-2 left-2 right-2">
                 <div className="px-24 py-10">
                   <p className="text-white text-lg mb-8">
-                    Perkraustymo paslaugos – daugiau nei daiktų pervežimas iš taško A į tašką B. „Mes Jau Čia" komanda siekia užtikrinti, kad visas jūsų perkraustymo procesas taptų lengvesnis, saugesnis ir malonesnis. Mūsų paslaugos orientuotos ne tik į fizinį perkėlimą, bet ir į tai, kad kiekvienas kliento poreikis būtų išklausytas bei įgyvendintas.
+                    Perkraustymo paslaugos – daugiau nei daiktų pervežimas iš taško A į tašką B. „Mes Jau Čia&quot; komanda siekia užtikrinti, kad visas jūsų perkraustymo procesas taptų lengvesnis, saugesnis ir malonesnis. Mūsų paslaugos orientuotos ne tik į fizinį perkėlimą, bet ir į tai, kad kiekvienas kliento poreikis būtų išklausytas bei įgyvendintas.
                   </p>
 
                   <button className="px-10 py-3 rounded-full border-2 border-red-500 text-red-600 
