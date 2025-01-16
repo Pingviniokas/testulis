@@ -1,9 +1,10 @@
 import Hero from '@/components/Hero';
 
-export default function PerkraustymoPage() {
+export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
+     
     </main>
   );
 }
