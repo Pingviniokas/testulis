@@ -99,7 +99,7 @@ export default function Navbar() {
 
     const toggleMobileMenu = () => {
         if (isMobileMenuOpen) {
-            setIsServicesOpen(false); // Reset services menu when closing mobile menu
+            setIsServicesOpen(false);
         }
         setIsMobileMenuOpen(!isMobileMenuOpen);
         if (!isMobileMenuOpen) {
@@ -119,14 +119,16 @@ export default function Navbar() {
         <>
             <nav
                 ref={navRef}
-                className={`fixed w-full z-[100] transition-all duration-700 ${isLoaded ? 'navbar-enter' : 'opacity-0'
-                    }`}
+                className={`fixed w-full z-[100] transition-all duration-700 ${isLoaded ? 'navbar-enter' : 'opacity-0'}`}
                 onMouseLeave={handleMouseLeave}
             >
                 <div className="max-w-12xl mx-auto px-4">
                     <div className="flex items-center justify-between h-20">
                         {/* Logo with Home Link */}
-                        <Link href="/" className="flex-shrink-0 relative w-[200px] h-[50px]">
+                        <Link
+                            href="/"
+                            className="flex-shrink-0 relative w-[200px] h-[50px] mt-12 ml-24"
+                        >
                             <Image
                                 src="/images/logoMJC.webp"
                                 alt="MJC Logo"
@@ -137,17 +139,17 @@ export default function Navbar() {
                         </Link>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden lg:flex items-center justify-center mt-12"> {/* Added mt-8 for lower positioning */}
+                        <div className="hidden lg:flex items-center justify-center mt-12">
                             <div className="bg-[#3b4956] w-[548px] h-[56px] rounded-[60px] flex items-center justify-between px-4">
-                                <Link
-                                    href="/paslaugos"
+                                <div
                                     className="relative group"
+                                    onMouseEnter={handleMouseEnter}
                                 >
-                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
+                                    <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4 cursor-pointer">
                                         Paslaugos
                                     </span>
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                </Link>
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[126px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                </div>
 
                                 <Link
                                     href="/apie-mus"
@@ -156,7 +158,7 @@ export default function Navbar() {
                                     <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
                                         Apie mus
                                     </span>
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[126px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 </Link>
 
                                 <Link
@@ -166,7 +168,7 @@ export default function Navbar() {
                                     <span className="font-sora font-normal text-[14px] leading-[17.64px] text-white group-hover:text-black relative z-10 px-4">
                                         Kontaktai
                                     </span>
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[118px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[126px] h-[50px] bg-white rounded-[60px] opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 </Link>
 
                                 <Link
@@ -176,23 +178,16 @@ export default function Navbar() {
                                     <span className="font-sora font-normal text-[14px] leading-[17.64px] text-[#FF0000] relative z-10 px-4">
                                         Kainininkas
                                     </span>
-                                    <div className="border-[1px] border-[#FF0000] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[128px] h-[50px] rounded-[60px]" />
+                                    <div className="border-[1px] border-[#FF0000] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[134px] h-[50px] rounded-[60px]" />
                                 </Link>
                             </div>
                         </div>
-
-
-
-
-
-
 
                         {/* Mobile menu button */}
                         <div className="lg:hidden">
                             <button
                                 onClick={toggleMobileMenu}
-                                className={`p-2 rounded-md transition-colors duration-300 ${scrolled || isNavHovered || isMobileMenuOpen ? 'text-gray-600 hover:text-gray-900' : 'text-white hover:text-gray-200'
-                                    }`}
+                                className={`p-2 rounded-md transition-colors duration-300 ${scrolled || isNavHovered || isMobileMenuOpen ? 'text-gray-600 hover:text-gray-900' : 'text-white hover:text-gray-200'}`}
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -251,8 +246,7 @@ export default function Navbar() {
                 {/* Mobile menu */}
                 <div
                     ref={mobileMenuRef}
-                    className={`lg:hidden bg-white mobile-menu-container ${isMobileMenuOpen ? 'mobile-menu-enter' : 'mobile-menu-exit'
-                        }`}
+                    className={`lg:hidden bg-white mobile-menu-container ${isMobileMenuOpen ? 'mobile-menu-enter' : 'mobile-menu-exit'}`}
                 >
                     <div className="mobile-menu-content">
                         <div className="px-4 pt-2 pb-6 space-y-2">
@@ -302,7 +296,6 @@ export default function Navbar() {
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

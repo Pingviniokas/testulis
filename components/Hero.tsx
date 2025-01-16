@@ -8,7 +8,7 @@ const Hero = () => {
   const [activeTab, setActiveTab] = useState('moving');
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden font-sora rounded-[16px] m-[10px]">
       {/* Background Container */}
       <div className="absolute inset-0 w-full h-full z-0">
         {/* Dark Overlay with dynamic opacity */}
@@ -19,9 +19,9 @@ const Hero = () => {
 
         {/* Moving Video Background */}
         <div
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${activeTab === 'moving'
-            ? 'scale-100 opacity-100'
-            : 'scale-105 opacity-0'
+          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform rounded-[16px] ${activeTab === 'moving'
+              ? 'scale-100 opacity-100'
+              : 'scale-105 opacity-0'
             }`}
         >
           <video
@@ -82,7 +82,7 @@ const Hero = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
               {/* Left Content */}
               <div className="space-y-6 transition-opacity duration-500 ease-out">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white transition-colors duration-500">
+                <h1 className="font-sora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white transition-colors duration-500">
                   Profesionalios
                   <br />
                   <span className="bg-gradient-to-r from-[#8B0000] to-[#FF0000] text-transparent bg-clip-text inline-block">
@@ -92,7 +92,7 @@ const Hero = () => {
                   Paslaugos
                 </h1>
 
-                <p className="text-lg sm:text-xl text-gray-200 max-w-lg leading-relaxed transition-opacity duration-500">
+                <p className="font-sora text-lg sm:text-xl text-gray-200 max-w-lg leading-relaxed transition-opacity duration-500">
                   Mūsų patyrusi komanda pasirūpins visais Jūsų kraustymo, bei pervežimo rūpesčiais.
                 </p>
 
@@ -104,20 +104,14 @@ const Hero = () => {
                     { icon: <Users size={16} className="sm:w-6 sm:h-6" />, title: 'Patyrusi komanda', desc: 'Taupome Jūsų laiką' },
                     { icon: <Clock size={16} className="sm:w-6 sm:h-6" />, title: 'Dirbame 24/7 ', desc: 'Atvykstame laiku' }
                   ].map((feature, index) => (
-                    <div
-                      key={index}
-                      className="group p-2 sm:p-4 bg-white/90 rounded-xl border border-white/20 hover:border-red-600 transition-all duration-300 cursor-pointer"
-                      style={{
-                        transitionDelay: `${index * 50}ms`
-                      }}
-                    >
+                    <div key={index} className="group p-2 sm:p-4 bg-white/90 rounded-xl border border-white/20 hover:border-red-600 transition-all duration-300 cursor-pointer">
                       <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-center sm:text-left">
                         <div className="p-1.5 sm:p-2 bg-red-50 rounded-lg text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
                           {feature.icon}
                         </div>
                         <div>
-                          <h2 className="font-semibold text-gray-900 text-xs sm:text-base">{feature.title}</h2>
-                          <p className="text-[10px] sm:text-sm text-gray-600 mt-0.5 sm:mt-1">{feature.desc}</p>
+                          <h2 className="font-sora font-semibold text-gray-900 text-xs sm:text-base">{feature.title}</h2>
+                          <p className="font-sora text-[10px] sm:text-sm text-gray-600 mt-0.5 sm:mt-1">{feature.desc}</p>
                         </div>
                       </div>
                     </div>
