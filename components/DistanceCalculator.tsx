@@ -28,19 +28,7 @@ const DistanceCalculator = () => {
 
 
 
-  const checkDistance = async () => {
-    if (fromAddress && toAddress) {
-      try {
-        const response = await axios.post('/api/distance', {
-          fromAddress,
-          toAddress,
-        });
-        setIsInVilnius(response.data.isInVilnius);
-      } catch (error) {
-        console.error('Error checking distance:', error);
-      }
-    }
-  };
+
 
   const calculatePrice = (distance: number, isInVilnius: boolean, vehicleType: string) => {
     const vehicle = vehicleTypes.find(v => v.name === vehicleType);
