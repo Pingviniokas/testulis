@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { MapPin, ArrowRight, Car, Truck, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
 

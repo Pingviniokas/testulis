@@ -27,7 +27,7 @@ const Hero = () => {
     const textTl = gsap.timeline({ repeat: -1 });
     const texts = ["Profesionalios Transporto Paslaugos", "Krovinių pervežimas", "Fiskaro nuoma"];
 
-    texts.forEach((text, index) => {
+    texts.forEach((text) => {
       textTl.to(textRef.current, { duration: 2, text: text, ease: "none" })
         .to(textRef.current, { duration: 1, text: text, ease: "none" }, "+=1");
     });
