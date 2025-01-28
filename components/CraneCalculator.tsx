@@ -13,16 +13,7 @@ const CraneCalculator = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const addressInputRef = useRef(null);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.google) {
-      const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current);
-      
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        setAddress(place.formatted_address || '');
-      });
-    }
-  }, []);
+
 
   const handleCalculate = () => {
     if (!address || !hours) {
