@@ -19,7 +19,6 @@ const DistanceCalculator = () => {
   const [fromAddress, setFromAddress] = useState('');
   const [toAddress, setToAddress] = useState('');
   const [result, setResult] = useState('');
-  const [isInVilnius, setIsInVilnius] = useState(true);
   const [loaders, setLoaders] = useState('Nereikia');
   const [hours, setHours] = useState('');
   const [isFlipped, setIsFlipped] = useState(false);
@@ -174,11 +173,11 @@ const DistanceCalculator = () => {
                   placeholder="Laikas valandomis"
                   value={hours}
                   onChange={(e) => setHours(e.target.value)}
-                  className={`w-full px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white/50 transition-all ${!isInVilnius && selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'
+                  className={`w-full px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white/50 transition-all ${selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'
                       ? 'opacity-50 cursor-not-allowed'
                       : 'focus:ring-2 focus:ring-red-500 focus:border-transparent'
                     }`}
-                  disabled={!isInVilnius && selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'}
+                  disabled={selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'}
                 />
               </div>
             </div>
