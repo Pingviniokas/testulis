@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapPin, ArrowRight, Car, Truck, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
 
@@ -19,14 +19,45 @@ const DistanceCalculator = () => {
   const [fromAddress, setFromAddress] = useState('');
   const [toAddress, setToAddress] = useState('');
   const [result, setResult] = useState('');
+  const [isInVilnius, setIsInVilnius] = useState(true);
   const [loaders, setLoaders] = useState('Nereikia');
   const [hours, setHours] = useState('');
   const [isFlipped, setIsFlipped] = useState(false);
   const fromInputRef = useRef(null);
   const toInputRef = useRef(null);
 
-  
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.google) {
+      const autocompleteFrom = new window.google.maps.places.Autocomplete(fromInputRef.current);
+      const autocompleteTo = new window.google.maps.places.Autocomplete(toInputRef.current);
 
+      autocompleteFrom.addListener('place_changed', () => {
+        const place = autocompleteFrom.getPlace();
+        setFromAddress(place.formatted_address || '');
+        checkDistance();
+      });
+
+      autocompleteTo.addListener('place_changed', () => {
+        const place = autocompleteTo.getPlace();
+        setToAddress(place.formatted_address || '');
+        checkDistance();
+      });
+    }
+  }, []);
+
+  const checkDistance = async () => {
+    if (fromAddress && toAddress) {
+      try {
+        const response = await axios.post('/api/distance', {
+          fromAddress,
+          toAddress,
+        });
+        setIsInVilnius(response.data.isInVilnius);
+      } catch (error) {
+        console.error('Error checking distance:', error);
+      }
+    }
+  };
 
   const calculatePrice = (distance: number, isInVilnius: boolean, vehicleType: string) => {
     const vehicle = vehicleTypes.find(v => v.name === vehicleType);
@@ -164,7 +195,21 @@ const DistanceCalculator = () => {
                 </select>
               </div>
 
-              
+              <div>
+                <label htmlFor="hours" className="sr-only">Laikas valandomis</label>
+                <input
+                  id="hours"
+                  type="number"
+                  placeholder="Laikas valandomis"
+                  value={hours}
+                  onChange={(e) => setHours(e.target.value)}
+                  className={`w-full px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white/50 transition-all ${!isInVilnius && selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'focus:ring-2 focus:ring-red-500 focus:border-transparent'
+                    }`}
+                  disabled={!isInVilnius && selectedVehicle !== 'Mikroautobusas iki 3.5t' && selectedVehicle !== 'Mikroautobusas su liftu'}
+                />
+              </div>
             </div>
 
             {/* Calculate Button */}

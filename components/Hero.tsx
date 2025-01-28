@@ -1,148 +1,145 @@
 "use client";
 
-import { useState } from 'react';
-import { Shield, Users, Truck, Clock } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ChevronDown } from 'lucide-react';
 import TabsContainer from './TabsContainer';
+import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('moving');
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const heroRef = useRef(null);
+  const cardRef = useRef(null);
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(TextPlugin);
+
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Text animation
+    const textTl = gsap.timeline({ repeat: -1 });
+    const texts = ["Profesionalios Transporto Paslaugos", "Krovinių pervežimas", "Fiskaro nuoma"];
+
+    texts.forEach((text, index) => {
+      textTl.to(textRef.current, { duration: 2, text: text, ease: "none" })
+        .to(textRef.current, { duration: 1, text: text, ease: "none" }, "+=1");
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      textTl.kill();
+    };
+  }, []);
+
+  const cardOpacity = Math.min(scrollPosition / 500, 1);
+  const cardTransform = `translateY(${Math.max(150 - scrollPosition / 2, 0)}px) scale(${0.8 + 0.2 * cardOpacity})`;
 
   return (
-    <section className="relative overflow-hidden font-sora rounded-[16px] m-[10px]">
-      {/* Background Container */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        {/* Dark Overlay with dynamic opacity */}
-        <div
-          className={`absolute inset-0 bg-black z-10 transition-opacity duration-1000 ease-in-out ${activeTab === 'moving' ? 'opacity-30' : 'opacity-40'
+    <div className="h-[200vh]"> {/* Wrapper to allow scrolling */}
+      <section ref={heroRef} className="sticky top-0 font-sora h-screen flex flex-col items-center justify-start pt-40 overflow-hidden">
+        {/* Background videos */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <div
+            className={`absolute inset-0 bg-[#000] z-10 transition-opacity duration-1000 ease-in-out ${
+              activeTab === 'moving' ? 'opacity-50' : 'opacity-40'
             }`}
-        />
+          />
 
-        {/* Moving Video Background */}
-        <div
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform rounded-[16px] ${activeTab === 'moving'
-              ? 'scale-100 opacity-100'
-              : 'scale-105 opacity-0'
+          <div
+            className={`absolute inset-0 transition-all duration-1000 ease-in-out transform rounded-[16px] ${
+              activeTab === 'moving'
+                ? 'scale-100 opacity-100'
+                : 'scale-105 opacity-0'
             }`}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
           >
-            <source src="/videos/mov.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
+            >
+              <source src="/videos/mov.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div
+            className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
+              activeTab === 'disposal'
+                ? 'scale-100 opacity-100'
+                : 'scale-105 opacity-0'
+            }`}
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
+            >
+              <source src="/videos/disposal.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div
+            className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
+              activeTab === 'crane'
+                ? 'scale-100 opacity-100'
+                : 'scale-105 opacity-0'
+            }`}
+          >
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
+            >
+              <source src="/videos/crane.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
 
-        {/* Disposal Video Background */}
-        <div
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${activeTab === 'disposal'
-            ? 'scale-100 opacity-100'
-            : 'scale-105 opacity-0'
-            }`}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+          <div className="text-center mb-24">
+            <h1 ref={textRef} className="font-sora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white transition-colors duration-500 min-h-[3em]">
+            </h1>
+          </div>
+
+          <div
+            ref={cardRef}
+            className="w-full max-w-4xl relative"
+            style={{ 
+              opacity: cardOpacity,
+              transform: cardTransform,
+              transition: 'opacity 0.3s, transform 0.3s'
+            }}
           >
-            <source src="/videos/disposal.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-
-        {/* Crane Video Background */}
-        <div
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${activeTab === 'crane'
-            ? 'scale-100 opacity-100'
-            : 'scale-105 opacity-0'
-            }`}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute w-full h-full object-cover transition-transform duration-1000 ease-out"
-          >
-            <source src="/videos/crane.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-
-      {/* Content Wrapper */}
-      <div className="relative z-20 pt-[80px]">
-        <div className="py-12 sm:py-16 lg:py-24">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-              {/* Left Content */}
-              <div className="space-y-6 transition-opacity duration-500 ease-out">
-                <h1 className="font-sora text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white transition-colors duration-500">
-                  Profesionalios
-                  <br />
-                  <span className="bg-gradient-to-r from-[#8B0000] to-[#FF0000] text-transparent bg-clip-text inline-block">
-                    Transporto
-                  </span>
-                  <br />
-                  Paslaugos
-                </h1>
-
-                <p className="font-sora text-lg sm:text-xl text-gray-200 max-w-lg leading-relaxed transition-opacity duration-500">
-                  Mūsų patyrusi komanda pasirūpins visais Jūsų kraustymo, bei pervežimo rūpesčiais.
-                </p>
-
-                {/* Feature Grid */}
-                <div className="grid grid-cols-2 gap-2 sm:gap-4 pt-6 max-w-xl">
-                  {[
-                    { icon: <Truck size={16} className="sm:w-6 sm:h-6" />, title: 'Kraustymo paslaugos', desc: 'Kiti nestandartiniai užsakymai' },
-                    { icon: <Shield size={16} className="sm:w-6 sm:h-6" />, title: 'Draudimas', desc: 'Mes atsakome už Jūsų turtą' },
-                    { icon: <Users size={16} className="sm:w-6 sm:h-6" />, title: 'Patyrusi komanda', desc: 'Taupome Jūsų laiką' },
-                    { icon: <Clock size={16} className="sm:w-6 sm:h-6" />, title: 'Dirbame 24/7 ', desc: 'Atvykstame laiku' }
-                  ].map((feature, index) => (
-                    <div key={index} className="group p-2 sm:p-4 bg-white/90 rounded-xl border border-white/20 hover:border-red-600 transition-all duration-300 cursor-pointer">
-                      <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-center sm:text-left">
-                        <div className="p-1.5 sm:p-2 bg-red-50 rounded-lg text-red-600 group-hover:bg-red-600 group-hover:text-white transition-colors duration-300">
-                          {feature.icon}
-                        </div>
-                        <div>
-                          <h2 className="font-sora font-semibold text-gray-900 text-xs sm:text-base">{feature.title}</h2>
-                          <p className="font-sora text-[10px] sm:text-sm text-gray-600 mt-0.5 sm:mt-1">{feature.desc}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Column - Calculator Card */}
-              <div className="relative rounded-2xl shadow-2xl transition-all duration-500 ease-in-out bg-gradient-to-b from-white/90 to-white/95 backdrop-filter mt-8 lg:mt-0">
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center justify-center mb-4">
-                    <h2 className="text-xl font-bold text-gray-900">Kainos skaičiuoklė</h2>
-                  </div>
-                  <TabsContainer onTabChange={setActiveTab} />
-                </div>
-                <div className="absolute -top-1 -bottom-1 -left-1 -right-1 bg-gradient-to-b from-red-50/100 to-transparent rounded-2xl -z-10"></div>
+            <div className="absolute inset-0 neon-border"></div>
+            <div className="bg-black/30 backdrop-filter backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden relative z-10">
+              <div className="p-6 sm:p-8">
+                <TabsContainer onTabChange={setActiveTab} />
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Service Professional Image */}
-      <div className="absolute bottom-0 right-5 z-30 hidden lg:block">
-        <img
-          src="/images/pers.png"
-          alt="Service Professional"
-          className="h-[350px] object-contain"
-        />
-      </div>
-    </section>
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
+          <p className="mb-2">Scroll to reveal</p>
+          <ChevronDown className="w-6 h-6 animate-bounce" />
+        </div>
+      </section>
+    </div>
   );
 };
 

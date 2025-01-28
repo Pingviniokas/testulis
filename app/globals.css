@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #3B4956;
-  --foreground: #171717;
+  --color1: #DCDDDA;
+  --color2: #D2CBC0;
+  --color3: #C5B69D;
+  --color4: #BBAB92;
+  --color5: #B09B7E;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,9 +18,29 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  
+  background: linear-gradient(
+    135deg,
+    var(--color1) 0%,
+    var(--color2) 25%,
+    var(--color3) 50%,
+    var(--color4) 75%,
+    var(--color5) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  min-height: 100vh;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 
@@ -209,3 +232,44 @@ body {
 
 
 
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+
+
+
+@keyframes neonGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 5px #000000,
+      0 0 3px #4e282f,
+      0 0 4px #3b3b3b,
+      0 0 3px #520004,
+      0 0 4px #c2001a,
+      0 0 5px #97071a,
+      0 0 6px #fd0000,
+      0 0 70px #4b00009c;
+  }
+  50% { 
+    box-shadow: 
+      0 0 2px #252525,
+      0 0 5px #ff1313,
+      0 0 7px #fff,
+      0 0 6px #6e0006,
+      0 0 7px #e2000b,
+      0 0 4px #ff1177,
+      0 0 8px #460006,
+      0 0 90px #aa01188a;
+  }
+}
+
+.neon-border {
+  border-radius: 1.5rem;
+  animation: neonGlow 4s ease-in-out infinite alternate;
+}

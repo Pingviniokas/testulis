@@ -62,7 +62,7 @@ const Hero = () => {
       <section className="relative w-full min-h-screen p-3">
         <div className="relative w-full rounded-3xl bg-[#CECFD4] overflow-hidden">
           {/* Red corner box */}
-          <div className="absolute top-0 left-0 bg-[#DC2625] rounded-br-3xl rounded-tr-3xl rounded-bl-3xl z-10 shadow-[-30px_3px_0px_3px_#3B4956,_3px_3px_0px_3px_#3B4956,_-30px_3px_0px_3px_#3B4956]">
+          <div className="absolute top-0 left-0 bg-[#DC2625] rounded-3xl z-10 border-[5px] border-[#3B4956]">
             <div className="px-12 py-3 flex items-center gap-5">
               <Image 
                 src="/images/target.svg" 
