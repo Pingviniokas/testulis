@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Truck, Trash2, Cone } from 'lucide-react';
 import DistanceCalculator from './DistanceCalculator';
 import DisposalCalculator from './DisposalCalculator';
 import CraneCalculator from './CraneCalculator';
@@ -11,11 +13,31 @@ type TabsContainerProps = {
 
 const TabsContainer = ({ onTabChange }: TabsContainerProps) => {
   const [activeTab, setActiveTab] = useState('moving');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   
   const tabs = [
-    { id: 'moving', label: 'Pervežimas' },
-    { id: 'disposal', label: 'Utilizavimas' },
-    { id: 'crane', label: 'Fiskaro nuoma' }
+    { 
+      id: 'moving', 
+      label: 'Pervežimas',
+      icon: <Truck className="w-4 h-4" />,
+      color: 'from-red-500 to-red-600'
+    },
+    { 
+      id: 'disposal', 
+      label: 'Utilizavimas',
+      icon: <Trash2 className="w-4 h-4" />,
+      color: 'from-green-500 to-green-600'
+    },
+    { 
+      id: 'crane', 
+      label: 'Fiskaro nuoma',
+      icon: <Cone className="w-4 h-4" />,
+      color: 'from-blue-500 to-blue-600'
+    }
   ];
 
   const handleTabChange = (tabId: string) => {
@@ -23,35 +45,54 @@ const TabsContainer = ({ onTabChange }: TabsContainerProps) => {
     onTabChange(tabId);
   };
 
+  if (!mounted) return null;
+
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-3 gap-px bg-gray-200 p-0.5 rounded-lg mb-3">
+    <div className="w-full backdrop-blur-lg bg-white/10 rounded-xl p-4">
+      <div className="grid grid-cols-3 gap-2 p-1 bg-black/20 rounded-lg mb-6">
         {tabs.map((tab) => (
-          <button
+          <motion.button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`
-              relative py-2 px-2 rounded-md text-xs font-medium
-              transition-all duration-300 ease-in-out
+              relative py-3 px-4 rounded-md text-sm font-medium
+              flex items-center justify-center gap-2
+              transition-all duration-300
               ${activeTab === tab.id
-                ? 'bg-white text-red-600 shadow-sm'
-                : 'bg-transparent text-gray-600 hover:bg-gray-100'
+                ? 'text-white'
+                : 'text-gray-400 hover:text-white hover:bg-white/5'
               }
             `}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <span className="relative z-10">{tab.label}</span>
             {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-red-600 transition-transform duration-300" />
+              <motion.div
+                className={`absolute inset-0 bg-gradient-to-r ${tab.color} rounded-md`}
+                layoutId="activeTab"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+              />
             )}
-          </button>
+            <span className="relative z-10">{tab.icon}</span>
+            <span className="relative z-10">{tab.label}</span>
+          </motion.button>
         ))}
       </div>
 
-      <div className="h-[350px]">
-        {activeTab === 'moving' && <DistanceCalculator />}
-        {activeTab === 'disposal' && <DisposalCalculator />}
-        {activeTab === 'crane' && <CraneCalculator />}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="h-[350px]"
+        >
+          {activeTab === 'moving' && <DistanceCalculator />}
+          {activeTab === 'disposal' && <DisposalCalculator />}
+          {activeTab === 'crane' && <CraneCalculator />}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

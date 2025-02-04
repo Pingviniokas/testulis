@@ -201,7 +201,29 @@ body {
 .submenu-item-delay-3 { animation-delay: 0.3s; }
 .submenu-item-delay-4 { animation-delay: 0.4s; }
 
+/* Flip card styles */
+.flip-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
 
+.flip-card-inner {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
 
 
 
